@@ -34,4 +34,22 @@ describe('Sequence', () => {
         expect(sequence.isActive).toBe(true);
         expect(sequence.countRecipients()).toBe(0);
     });
+
+    it ('has tracking enabled by default, including: opening emails, clicking on links, and downloading attachments', () => {
+        const sequence = new Sequence(owner, 'Test Sequence');
+
+        expect(sequence.isTrackingOfOpensEnabled).toBe(true);
+        expect(sequence.isTrackingOfLinksEnabled).toBe(true);
+        expect(sequence.isTrackingOfAttachmentDownloadsEnabled).toBe(true);
+    })
+
+    it ('can disable all tracking at once', () => {
+        const sequence = new Sequence(owner, 'Test Sequence');
+
+        sequence.disableAllTracking();
+
+        expect(sequence.isTrackingOfOpensEnabled).toBe(false);
+        expect(sequence.isTrackingOfLinksEnabled).toBe(false);
+        expect(sequence.isTrackingOfAttachmentDownloadsEnabled).toBe(false);
+    })
 });

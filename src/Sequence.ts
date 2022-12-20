@@ -3,7 +3,12 @@ import User from "./User";
 class Sequence {
     readonly owner: User;
     readonly name: String;
+
     private _isActive: boolean;
+    private _isTrackingOfAttachmentDownloadsEnabled = true;
+    private _isTrackingOfLinksEnabled = true;
+    private _isTrackingOfOpensEnabled = true;
+
     constructor(owner: User, name: String) {
         if (name.trim().length === 0) throw new Error('You should provide a sequence name');
 
@@ -22,6 +27,24 @@ class Sequence {
 
     countRecipients(): number {
         return 0;
+    }
+
+    get isTrackingOfOpensEnabled(): boolean {
+        return this._isTrackingOfOpensEnabled;
+    }
+
+    get isTrackingOfLinksEnabled(): boolean {
+        return this._isTrackingOfLinksEnabled;
+    }
+
+    get isTrackingOfAttachmentDownloadsEnabled() {
+        return this._isTrackingOfAttachmentDownloadsEnabled;
+    }
+
+    disableAllTracking() {
+        this._isTrackingOfOpensEnabled = false;
+        this._isTrackingOfLinksEnabled = false;
+        this._isTrackingOfAttachmentDownloadsEnabled = false;
     }
 }
 
