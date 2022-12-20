@@ -1,5 +1,5 @@
 import User from "./User";
-import Sequence from "./Sequence";
+import Sequence from "./SequenceZod";
 import DomainError from "./DomainError";
 
 const owner = new User("ownerId");
@@ -13,9 +13,9 @@ describe('Sequence', () => {
     });
 
     it('must have a non-empty name', () => {
-        expect(() => new Sequence(owner, '')).toThrowError('You should provide a sequence name');
-        expect(() => new Sequence(owner, '   ')).toThrowError('You should provide a sequence name');
-        expect(() => new Sequence(owner, `\t`)).toThrowError('You should provide a sequence name');
+        expect(() => new Sequence(owner, '')).toThrowError();
+        expect(() => new Sequence(owner, '   ')).toThrowError();
+        expect(() => new Sequence(owner, `\t`)).toThrowError();
     });
 
     it('has no recipients by default', () => {
