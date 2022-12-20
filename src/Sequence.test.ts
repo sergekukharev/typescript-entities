@@ -52,4 +52,16 @@ describe('Sequence', () => {
         expect(sequence.isTrackingOfLinksEnabled).toBe(false);
         expect(sequence.isTrackingOfAttachmentDownloadsEnabled).toBe(false);
     })
+
+    // Now the interesting part of more complex business logic
+    it ("won't enable tracking if Owner disabled it in their account", () => {
+        const ownerWithoutTracking = new User("123456ac");
+        ownerWithoutTracking.disableEmailTracking();
+
+        const sequence = new Sequence(ownerWithoutTracking, 'Test Sequence');
+
+        expect(sequence.isTrackingOfOpensEnabled).toBe(false);
+        expect(sequence.isTrackingOfLinksEnabled).toBe(false);
+        expect(sequence.isTrackingOfAttachmentDownloadsEnabled).toBe(false);
+    });
 });

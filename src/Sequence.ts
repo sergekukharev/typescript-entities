@@ -15,6 +15,10 @@ class Sequence {
         this.owner = owner;
         this.name = name;
         this._isActive = false;
+
+        if (owner.isTrackingOfEmailsEnabled === false) {
+            this.disableAllTracking();
+        }
     }
 
     activate(): void {
