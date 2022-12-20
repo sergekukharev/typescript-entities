@@ -1,4 +1,5 @@
 import User from "./User";
+import DomainError from "./DomainError";
 
 class Sequence {
     readonly owner: User;
@@ -49,6 +50,14 @@ class Sequence {
         this._isTrackingOfOpensEnabled = false;
         this._isTrackingOfLinksEnabled = false;
         this._isTrackingOfAttachmentDownloadsEnabled = false;
+    }
+
+    enableTrackingOfOpens() {
+        if (this.owner.isTrackingOfEmailsEnabled === false) {
+            throw new DomainError("Can't activate tracking because it was disabled by user account-wide");
+        }
+
+        this._isTrackingOfOpensEnabled = true;
     }
 }
 
